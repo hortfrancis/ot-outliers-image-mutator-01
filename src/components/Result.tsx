@@ -14,7 +14,7 @@ export default function Result({
             alt="Mutated result"
             className={
               'absolute w-full h-full object-cover' + ' ' +
-              'rounded-4xl shadow-lg'
+              'shadow-2xl rounded-md'
             }
           />
         </div>
