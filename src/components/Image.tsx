@@ -11,7 +11,7 @@ export default function Image({
       <img
         src={url}
         alt="Image"
-        className="object-cover w-full h-full"
+        className='object-cover w-full h-full rounded-xl'
         style={{ aspectRatio: '1 / 1' }}
       />
     </div>
