@@ -1,1 +1,24 @@
-@import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&display=swap");
+@import "tailwindcss";
+
+body {
+  font-family: "Spline Sans Mono", monospace;
+}
+
+@theme {
+  /* 1. Register your animation variable */
+  --animate-pulse-scale: pulse-scale 2s ease-in-out infinite;
+
+  /* 2. Inject the keyframes */
+  @keyframes pulse-scale {
+    0%,
+    100% {
+      transform: scale(1);
+      background-color: black;
+    }
+    50% {
+      transform: scale(1.2);
+      background-color: rgb(0, 0, 0, 0.5);
+    }
+  }
+}

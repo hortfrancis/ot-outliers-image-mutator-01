@@ -1,18 +1,35 @@
+import Image from './components/Image';
+import Result from './components/Result';
+import gothsWithFishImage from './assets/images/source_images/goths_with_fish.webp';
+import greenCleanImage from './assets/images/source_images/green_clean.webp';
+import heuresMoonImage from './assets/images/source_images/heures_moon.png';
+import redCubeImage from './assets/images/source_images/red_cube.png';
 
+const baseImages = {
+  topLeft: gothsWithFishImage,
+  topRight: greenCleanImage,
+  bottomLeft: heuresMoonImage,
+  bottomRight: redCubeImage,
+}
 
 function App() {
-
-
   return (
-    <>
-      <div
-        className='flex flex-col items-center justify-center h-screen bg-gray-100'>
-        <h1
-          className='text-xl font-bold text-gray-800 mb-4'><code>
-            ot-outliers-image-mutator-01
-          </code></h1>
-      </div>
-    </>
+    <div
+      className={
+        'grid grid-cols-3 grid-rows-3' + ' ' +
+        'min-h-[100dvh]'
+      }
+    >
+      <Image url={baseImages.topLeft} />
+      <div>2</div>
+      <Image url={baseImages.topRight} />
+      <div>4</div>
+      <Result />
+      <div>6</div>
+      <Image url={baseImages.bottomLeft} />
+      <div>8</div>
+      <Image url={baseImages.bottomRight} />
+    </div>
   )
 }
 
