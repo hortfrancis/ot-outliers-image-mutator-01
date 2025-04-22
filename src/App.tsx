@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import BaseImage from './components/BaseImage';
 import Button from './components/Button';
+import ConnectionLine from './components/ConnectionLine';
 import Result from './components/Result';
 
 // Base images
@@ -103,66 +104,106 @@ function App() {
   }, [activeButtons, assignImage]);
 
   function handleButtonClick(image: keyof typeof activeButtons) {
-    console.log('Button clicked');
-    console.log('Image:', image);
-
     setActiveButtons((prevState) => ({
       ...prevState,
       [image]: !prevState[image],
     }));
-
   };
 
   return (
-    <div
-      className={
-        'grid grid-cols-3 grid-rows-3' + ' ' +
-        'min-h-[100dvh]' + ' ' +
-        'bg-stone-400 border-14 border-black'
-      }
-    >
-      <div className='flex flex-col justify-start align-center relative'>
-        <BaseImage url={baseImages.topLeft} position={'top-left'} />
-        <Button placement='right' activated={activeButtons.topLeft}
-          onClick={() => handleButtonClick('topLeft')} />
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black">
+      <div className='max-w-[600px] max-h-[600px]'>
+        <div
+          className={
+            'grid grid-cols-3 grid-rows-3' + ' ' +
+            'bg-stone-400 border-14 border-black'
+          }
+        >
+          <div className='flex flex-col justify-start align-center relative'>
+            <BaseImage
+              id='top-left-image'
+              url={baseImages.topLeft}
+              position={'top-left'}
+            />
+            <Button
+              id='top-left-button'
+              placement='right'
+              activated={activeButtons.topLeft}
+              onClick={() => handleButtonClick('topLeft')}
+            />
+          </div>
 
-      <div />
+          <div />
 
-      <div className='flex flex-col justify-start align-center relative'>
-        <BaseImage url={baseImages.topRight} position={'top-right'} />
-        <Button placement='below' activated={activeButtons.topRight}
-          onClick={() => handleButtonClick('topRight')} />
-      </div>
+          <div className='flex flex-col justify-start align-center relative'>
+            <BaseImage
+              id='top-right-image'
+              url={baseImages.topRight}
+              position={'top-right'}
+            />
+            <Button
+              id='top-right-button'
+              placement='below'
+              activated={activeButtons.topRight}
+              onClick={() => handleButtonClick('topRight')}
+            />
+          </div>
 
-      <div className='flex flex-col justify-start p-2 text-xs italic text-slate-500'>
-        <span>{activeButtons.topLeft ? 'top left' : '---'}</span>
-        <span>{activeButtons.topRight ? 'top right' : '---'}</span>
-        <span>{activeButtons.bottomLeft ? 'bottom left' : '---'}</span>
-        <span>{activeButtons.bottomRight ? 'bottom right' : '---'}</span>
-      </div>
+          <div className='flex flex-col justify-start p-2 text-xs italic text-slate-500'>
+            <span>{activeButtons.topLeft ? 'top left' : '---'}</span>
+            <span>{activeButtons.topRight ? 'top right' : '---'}</span>
+            <span>{activeButtons.bottomLeft ? 'bottom left' : '---'}</span>
+            <span>{activeButtons.bottomRight ? 'bottom right' : '---'}</span>
+          </div>
 
-      <Result imageUrl={mutatedImage} />
+          <Result id='result' imageUrl={mutatedImage} />
 
-      <div className='flex flex-col justify-end p-2 text-right text-xs italic text-slate-500'>
-        <span>{activeButtons.topLeft ? 'goths' : '---'}</span>
-        <span>{activeButtons.topRight ? 'très riches heures' : '---'}</span>
-        <span>{activeButtons.bottomLeft ? 'grafik cubic' : '---'}</span>
-        <span>{activeButtons.bottomRight ? 'clean & green' : '---'}</span>
-      </div>
+          <div className='flex flex-col justify-end p-2 text-right text-xs italic text-slate-500'>
+            <span>{activeButtons.topLeft ? 'goths' : '---'}</span>
+            <span>{activeButtons.topRight ? 'très riches heures' : '---'}</span>
+            <span>{activeButtons.bottomLeft ? 'grafik cubic' : '---'}</span>
+            <span>{activeButtons.bottomRight ? 'clean & green' : '---'}</span>
+          </div>
 
-      <div className='flex-col justify-start align-center relative'>
-        <BaseImage url={baseImages.bottomLeft} position={'bottom-left'} />
-        <Button placement='above' activated={activeButtons.bottomLeft}
-          onClick={() => handleButtonClick('bottomLeft')} />
-      </div>
+          <div className='flex-col justify-start align-center relative'>
+            <BaseImage
+              id='bottom-left-image'
+              url={baseImages.bottomLeft}
+              position={'bottom-left'}
+            />
+            <Button
+              id='bottom-left-button'
+              placement='above'
+              activated={activeButtons.bottomLeft}
+              onClick={() => handleButtonClick('bottomLeft')}
+            />
+          </div>
 
-      <div />
+          <div />
 
-      <div className='flex-col justify-start align-center relative'>
-        <BaseImage url={baseImages.bottomRight} position={'bottom-right'} />
-        <Button placement='left' activated={activeButtons.bottomRight}
-          onClick={() => handleButtonClick('bottomRight')} />
+          <div className='flex-col justify-start align-center relative'>
+            <BaseImage
+              id='bottom-right-image'
+              url={baseImages.bottomRight}
+              position={'bottom-right'}
+            />
+            <Button
+              id='bottom-right-button'
+              placement='left'
+              activated={activeButtons.bottomRight}
+              onClick={() => handleButtonClick('bottomRight')} />
+          </div>
+
+          <ConnectionLine constant from='top-left-image' to='top-left-button' active={activeButtons.topLeft} />
+          <ConnectionLine constant from='top-right-image' to='top-right-button' active={activeButtons.topRight} />
+          <ConnectionLine constant from='bottom-left-image' to='bottom-left-button' active={activeButtons.bottomLeft} />
+          <ConnectionLine constant from='bottom-right-image' to='bottom-right-button' active={activeButtons.bottomRight} />
+
+          <ConnectionLine from='top-left-button' to='result' active={activeButtons.topLeft} />
+          <ConnectionLine from='top-right-button' to='result' active={activeButtons.topRight} />
+          <ConnectionLine from='bottom-left-button' to='result' active={activeButtons.bottomLeft} />
+          <ConnectionLine from='bottom-right-button' to='result' active={activeButtons.bottomRight} />
+        </div>
       </div>
     </div>
   )

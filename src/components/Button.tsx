@@ -9,6 +9,7 @@ export default function Button({
   placement,
   activated = false,
   onClick,
+  ...props
 }: ButtonProps) {
 
   const placementClasses = {
@@ -27,9 +28,10 @@ export default function Button({
         placementClasses[placement] + ' ' +
         'text-2xl font-medium text-white rounded cursor-pointer' + ' ' +
         'transition duration-300 ease-in-out' + ' ' +
-        (activated ? ('bg-amber-500 hover:bg-amber-700') : ('bg-slate-600 hover:bg-slate-700'))
+        (activated ? ('bg-amber-500 hover:bg-amber-600 border-b-4') : ('bg-slate-600 hover:bg-slate-700 border-b-0'))
       }
       data-placement={placement}
+      {...props}
     >
       {activated ? 'ON' : 'OFF'}
     </button >

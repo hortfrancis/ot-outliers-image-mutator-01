@@ -1,4 +1,4 @@
-interface ImageProps {
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   url: string;
   position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
@@ -6,6 +6,7 @@ interface ImageProps {
 export default function Image({
   url,
   position,
+  ...props
 }: ImageProps) {
 
   const positionClasses = {
@@ -16,14 +17,16 @@ export default function Image({
   };
 
   return (
-    <div className="relative" >
+    <div className="relative z-5" >
       <img
         src={url}
         alt="Base image"
         className={
           'w-full h-full object-cover border-black border-4' + ' ' +
           positionClasses[position]
-        } />
+        }
+        {...props}
+      />
     </div >
   )
 }

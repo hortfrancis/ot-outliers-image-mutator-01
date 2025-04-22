@@ -1,12 +1,16 @@
-interface ResultProps {
+import { HTMLAttributes } from 'react';
+
+interface ResultProps extends HTMLAttributes<HTMLDivElement> {
   imageUrl: string;
 }
 
 export default function Result({
   imageUrl,
+  ...props
 }: ResultProps) {
   return (
-    <div className="flex items-center justify-center h-full w-full relative">
+    <div {...props}
+      className="flex items-center justify-center h-full w-full relative">
       {imageUrl ? (
         <div className='flex items-center jusitify-center absolute w-72 h-72 z-10'>
           <img
@@ -14,31 +18,23 @@ export default function Result({
             alt="Mutated result"
             className={
               'absolute w-full h-full object-cover' + ' ' +
-              'shadow-2xl rounded-md'
+              'border-2 border-amber-500 shadow-2xl rounded-md'
             }
           />
         </div>
       ) : (
         <div className={
           'flex items-center justify-center absolute w-64 h-64 z-10' + ' ' +
-          'rounded-full bg-slate-600 animate-pulse-scale'
+          'rounded-full bg-black animate-pulse-scale'
         }>
           <div className={
-            'flex flex-col items-center justify-center gap-1.5' + ' ' +
+            'flex flex-col items-center justify-center gap-1.5 mb-4' + ' ' +
             'text-4xl font-medium text-white'
           }>
-            <span>
-              Feed
-            </span>
-            <span>
-              the
-            </span>
-            <span>
-              image
-            </span>
-            <span>
-              mutator
-            </span>
+            <span>Feed</span>
+            <span className='text-2xl font-normal my-[-4px]'>the</span>
+            <span>image</span>
+            <span className='font-black'>mutator</span>
           </div>
         </div>
       )}

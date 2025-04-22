@@ -14,11 +14,11 @@ body {
     0%,
     100% {
       transform: scale(1);
-      background-color: black;
+      /* background-color: black; */
     }
     50% {
       transform: scale(1.2);
-      background-color: rgb(0, 0, 0, 0.5);
+      /* background-color: rgb(0, 0, 0, 0.5); */
     }
   }
 }
